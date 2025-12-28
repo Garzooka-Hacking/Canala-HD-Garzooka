@@ -17,35 +17,28 @@
             <h1>SION TV</h1>
             <p style="font-size: 0.8rem; opacity: 0.6;">Canales en Vivo</p>
         </div>
-        <div class="sidebar-nav">
-            <button class="nav-btn active" id="btnPlayer">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                    <path
-                        d="M10,16.5V7.5L16,12L10,16.5ZM12,2C6.48,2,2,6.48,2,12s4.48,10,10,10s10-4.48,10-10S17.52,2,12,2Z" />
-                </svg>
-                Reproductor
-            </button>
-            <button class="nav-btn" id="btnShowChannels">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+
+        <div class="sidebar-content">
+            <button class="channels-toggle-btn" id="btnToggleChannels">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
                     <path
                         d="M4,11h5V5H4V11z M4,19h5v-6H4V19z M10,19h5v-6h-5V19z M16,19h5v-6h-5V19z M10,11h5V5h-5V11z M16,5v6h5V5H16z" />
                 </svg>
                 CANALES
+                <svg class="chevron" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
+                </svg>
             </button>
-        </div>
-        <div class="channel-list" id="channelList">
-            <!-- Channels will be injected by JavaScript -->
+
+            <div class="channel-list-container" id="channelListContainer">
+                <div class="channel-list" id="channelList">
+                    <!-- Channels will be injected by JavaScript -->
+                </div>
+            </div>
         </div>
     </aside>
 
     <main class="main-content" id="playerWrapper">
-        <div id="channelsGridView" class="channels-grid-view">
-            <h2 class="grid-title">Todos los Canales</h2>
-            <div class="grid-container" id="gridContainer">
-                <!-- Grid items injected by JS -->
-            </div>
-        </div>
-
         <div class="player-container" id="playerContainer">
             <video id="video" controls autoplay playsinline></video>
         </div>
@@ -72,7 +65,7 @@
         </div>
     </main>
 
-    <script src="app.js?v=800"></script>
+    <script src="app.js?v=900"></script>
 </body>
 
 </html>

@@ -24,7 +24,7 @@ body {
 .sidebar {
     width: var(--sidebar-width);
     background: var(--glass-bg);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
     border-right: 1px solid var(--glass-border);
     display: flex;
     flex-direction: column;
@@ -46,83 +46,115 @@ body {
     -webkit-text-fill-color: transparent;
 }
 
-.sidebar-nav {
+.sidebar-content {
     padding: 1rem;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    border-bottom: 1px solid var(--glass-border);
 }
 
-.nav-btn {
-    background: transparent;
-    border: 1px solid transparent;
+.channels-toggle-btn {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
     color: var(--text-color);
-    padding: 0.8rem 1rem;
+    padding: 1rem;
     border-radius: 12px;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 0.8rem;
-    font-weight: 600;
-    transition: all 0.2s ease;
+    gap: 1rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    transition: all 0.3s ease;
     text-align: left;
+    justify-content: space-between;
 }
 
-.nav-btn:hover {
-    background: rgba(255, 255, 255, 0.05);
+.channels-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
+}
+
+.channels-toggle-btn .chevron {
+    transition: transform 0.3s ease;
+}
+
+.channels-toggle-btn.open .chevron {
+    transform: rotate(180deg);
+}
+
+.channels-toggle-btn.open {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background: var(--accent-color);
+    color: #000;
+    border-color: var(--accent-color);
+}
+
+.channel-list-container {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border: 1px solid transparent;
+    border-top: none;
+}
+
+.channel-list-container.show {
+    max-height: 1000px;
+    transition: max-height 1s ease-in-out;
     border-color: var(--glass-border);
 }
 
-.nav-btn.active {
-    background: var(--accent-color);
-    color: #000;
-}
-
 .channel-list {
-    flex: 1;
-    overflow-y: auto;
     padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
 }
 
 .channel-item {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--glass-border);
-    border-radius: 12px;
-    padding: 1rem;
-    margin-bottom: 1rem;
+    border-radius: 10px;
+    padding: 0.8rem;
     cursor: pointer;
     transition: all 0.2s ease;
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.8rem;
 }
 
 .channel-item:hover {
     background: rgba(255, 255, 255, 0.15);
-    transform: translateY(-2px);
+    transform: translateX(5px);
     border-color: var(--accent-color);
 }
 
 .channel-item.active {
-    background: var(--accent-color);
+    background: rgba(0, 210, 255, 0.1);
     border-color: var(--accent-color);
 }
 
 .channel-item.active .channel-name {
-    color: #000;
+    color: var(--accent-color);
     font-weight: 700;
 }
 
 .channel-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
     background: rgba(255, 255, 255, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
+    font-size: 0.9rem;
 }
 
 .main-content {
@@ -131,81 +163,6 @@ body {
     flex-direction: column;
     position: relative;
     background: #000;
-}
-
-/* Channels Grid View */
-.channels-grid-view {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at center, #1a1a2e 0%, #050510 100%);
-    z-index: 100;
-    padding: 3rem;
-    overflow-y: auto;
-    display: none;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-.channels-grid-view.show {
-    display: flex;
-    animation: fadeIn 0.4s ease;
-}
-
-.grid-title {
-    font-size: 2rem;
-    font-weight: 800;
-    letter-spacing: -1px;
-    margin-bottom: 1rem;
-}
-
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 1.5rem;
-}
-
-.grid-channel-item {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: 20px;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    backdrop-filter: blur(10px);
-}
-
-.grid-channel-item:hover {
-    transform: translateY(-10px) scale(1.02);
-    background: rgba(255, 255, 255, 0.15);
-    border-color: var(--accent-color);
-    box-shadow: 0 10px 40px rgba(0, 210, 255, 0.2);
-}
-
-.grid-icon {
-    width: 80px;
-    height: 80px;
-    border-radius: 20px;
-    background: linear-gradient(135deg, var(--accent-color), #3a7bd5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    font-weight: 800;
-    color: #000;
-    box-shadow: 0 8px 20px rgba(0, 210, 255, 0.3);
-}
-
-.grid-name {
-    font-size: 1.1rem;
-    font-weight: 700;
-    text-align: center;
 }
 
 .player-container {
@@ -346,28 +303,15 @@ video {
 }
 
 /* Scrollbar Styling */
-.channel-list::-webkit-scrollbar {
+.channel-list-container::-webkit-scrollbar {
     width: 6px;
 }
 
-.channel-list::-webkit-scrollbar-track {
+.channel-list-container::-webkit-scrollbar-track {
     background: transparent;
 }
 
-.channel-list::-webkit-scrollbar-thumb {
-    background: var(--glass-border);
-    border-radius: 10px;
-}
-
-.channels-grid-view::-webkit-scrollbar {
-    width: 8px;
-}
-
-.channels-grid-view::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.2);
-}
-
-.channels-grid-view::-webkit-scrollbar-thumb {
+.channel-list-container::-webkit-scrollbar-thumb {
     background: var(--glass-border);
     border-radius: 10px;
 }
@@ -382,13 +326,5 @@ video {
 
     .sidebar.open {
         transform: translateX(300px);
-    }
-
-    .channels-grid-view {
-        padding: 1.5rem;
-    }
-
-    .grid-container {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     }
 }

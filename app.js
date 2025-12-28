@@ -30,12 +30,8 @@ const video = document.getElementById('video');
 const channelList = document.getElementById('channelList');
 const channelTitle = document.getElementById('channelTitle');
 const fullscreenBtn = document.getElementById('fullscreenBtn');
-const playerWrapper = document.getElementById('playerWrapper');
-const playerContainer = document.getElementById('playerContainer');
-const channelsGridView = document.getElementById('channelsGridView');
-const gridContainer = document.getElementById('gridContainer');
-const btnPlayer = document.getElementById('btnPlayer');
-const btnShowChannels = document.getElementById('btnShowChannels');
+const btnToggleChannels = document.getElementById('btnToggleChannels');
+const channelListContainer = document.getElementById('channelListContainer');
 
 let hls = null;
 
@@ -46,18 +42,16 @@ function loadChannel(channel) {
 
     channelTitle.textContent = channel.name;
 
-    // Update active state in sidebar
-    document.querySelectorAll('.channel-item, .nav-btn').forEach(item => {
+    // Update active state
+    document.querySelectorAll('.channel-item').forEach(item => {
         item.classList.remove('active');
-        if (item.dataset.id === channel.id || item.id === 'btnPlayer') {
+        if (item.dataset.id === channel.id) {
             item.classList.add('active');
         }
     });
 
-    hideChannelsGrid();
-
     if (Hls.isSupported()) {
-        console.log("Hls is supported, loading source:", channel.url);
+        console.log("Hls supported, loading:", channel.url);
         hls = new Hls({
             debug: false,
             enableWorker: true,
@@ -66,49 +60,35 @@ function loadChannel(channel) {
         });
         hls.loadSource(channel.url);
         hls.attachMedia(video);
-        hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
-            console.log("Manifest parsed, playing...");
+        hls.on(Hls.Events.MANIFEST_PARSED, function () {
             video.play().catch(e => {
-                console.warn("Autoplay blocked or play failed:", e);
-                // Try to play muted if blocked
+                console.warn("Autoplay blocked, muting...");
                 video.muted = true;
                 video.play();
             });
             updateQualityMenu(hls);
         });
 
-        // visual feedback for level switch
-        hls.on(Hls.Events.LEVEL_SWITCHED, function (event, data) {
-            updateQualitySelection(hls);
-        });
+        hls.on(Hls.Events.LEVEL_SWITCHED, () => updateQualitySelection(hls));
 
         hls.on(Hls.Events.ERROR, function (event, data) {
-            console.error("HLS Error:", data);
             if (data.fatal) {
                 switch (data.type) {
                     case Hls.ErrorTypes.NETWORK_ERROR:
-                        console.error("Network error, trying to recover...");
                         hls.startLoad();
                         break;
                     case Hls.ErrorTypes.MEDIA_ERROR:
-                        console.error("Media error, trying to recover...");
                         hls.recoverMediaError();
                         break;
                     default:
-                        console.error("Unrecoverable error Type:", data.type);
                         hls.destroy();
                         break;
                 }
             }
         });
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        console.log("Native HLS support detected");
         video.src = channel.url;
-        video.addEventListener('loadedmetadata', function () {
-            video.play().catch(e => console.warn("Native play failed:", e));
-        });
-    } else {
-        alert("Tu navegador no soporta la reproducción de este contenido.");
+        video.addEventListener('loadedmetadata', () => video.play());
     }
 }
 
@@ -130,59 +110,19 @@ function init() {
         channelList.appendChild(item);
     });
 
-    // Load first channel by default
+    // Toggle logic
+    btnToggleChannels.addEventListener('click', () => {
+        const isOpen = channelListContainer.classList.toggle('show');
+        btnToggleChannels.classList.toggle('open', isOpen);
+    });
+
+    // Load first channel
     if (channels.length > 0) {
         loadChannel(channels[0]);
     }
-
-    // Setup Grid
-    setupChannelsGrid();
-
-    // Nav Listeners
-    btnPlayer.addEventListener('click', () => {
-        hideChannelsGrid();
-        btnPlayer.classList.add('active');
-        btnShowChannels.classList.remove('active');
-    });
-
-    btnShowChannels.addEventListener('click', () => {
-        showChannelsGrid();
-        btnShowChannels.classList.add('active');
-        btnPlayer.classList.remove('active');
-    });
 }
 
-function setupChannelsGrid() {
-    gridContainer.innerHTML = '';
-    channels.forEach(channel => {
-        const item = document.createElement('div');
-        item.className = 'grid-channel-item';
-
-        const channelNum = channel.name.match(/\d+/);
-        const iconLabel = channelNum ? channelNum[0] : channel.name.charAt(0);
-
-        item.innerHTML = `
-            <div class="grid-icon">${iconLabel}</div>
-            <div class="grid-name">${channel.name}</div>
-        `;
-
-        item.onclick = () => {
-            loadChannel(channel);
-            btnPlayer.click();
-        };
-        gridContainer.appendChild(item);
-    });
-}
-
-function showChannelsGrid() {
-    channelsGridView.classList.add('show');
-}
-
-function hideChannelsGrid() {
-    channelsGridView.classList.remove('show');
-}
-
-// Quality Selector Logic
+// Quality Selector
 const settingsBtn = document.getElementById('settingsBtn');
 const qualityMenu = document.getElementById('qualityMenu');
 
@@ -199,28 +139,21 @@ document.onclick = (e) => {
 
 function updateQualityMenu(hls) {
     qualityMenu.innerHTML = '';
-
-    // Auto Option
     const autoOption = document.createElement('div');
     autoOption.className = `quality-option ${hls.autoLevelEnabled ? 'selected' : ''}`;
     autoOption.textContent = 'Auto';
     autoOption.onclick = () => {
-        hls.currentLevel = -1; // -1 triggers auto level
+        hls.currentLevel = -1;
         qualityMenu.classList.remove('show');
         updateQualitySelection(hls);
     };
     qualityMenu.appendChild(autoOption);
 
-    // Available Levels
     hls.levels.forEach((level, index) => {
         const option = document.createElement('div');
         const isSelected = !hls.autoLevelEnabled && hls.currentLevel === index;
         option.className = `quality-option ${isSelected ? 'selected' : ''}`;
-
-        // Format label (e.g. 1080p, 720p)
-        const label = level.height ? `${level.height}p` : `Level ${index}`;
-        option.textContent = label;
-
+        option.textContent = level.height ? `${level.height}p` : `Level ${index}`;
         option.onclick = () => {
             hls.currentLevel = index;
             qualityMenu.classList.remove('show');
@@ -231,21 +164,13 @@ function updateQualityMenu(hls) {
 }
 
 function updateQualitySelection(hls) {
-    // Re-render menu to update checkmarks
     updateQualityMenu(hls);
 }
 
-// Fullscreen Logic
 fullscreenBtn.onclick = () => {
-    if (video.requestFullscreen) {
-        video.requestFullscreen();
-    } else if (video.webkitRequestFullscreen) {
-        video.webkitRequestFullscreen();
-    } else if (video.msRequestFullscreen) {
-        video.msRequestFullscreen();
-    }
+    if (video.requestFullscreen) video.requestFullscreen();
+    else if (video.webkitRequestFullscreen) video.webkitRequestFullscreen();
 };
 
-console.info("Player Version: 4.0.0 - Disney Removed");
-console.info("Current Canal 4 URL:", channels[0].url);
+console.info("Player Version: 4.5.0 - Sidebar Toggle Implemented");
 init();
