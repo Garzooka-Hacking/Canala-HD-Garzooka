@@ -1,17 +1,17 @@
 const channels = [
     {
         name: "América TV (Canal 4) HD",
-        url: "https://live.saohgdasregions.fun:9092/MjAwLjIxNS4yNDguMTc1/20_.m3u8?token=IVsF4tZdBWu65PRg6x8u8Q&expires=1766963421",
+        url: "https://live-evg1.tv360.bitel.com.pe/bitel/americatv/playlist.m3u8",
         id: "america-tv"
     },
     {
         name: "Latina (Canal 2) HD",
-        url: "https://redirector.rudo.video/hls-video/567ffde3fa319fadf3419efda25619456231dfea/latina/latina.smil/playlist.m3u8",
+        url: "https://live-evg4.tv360.bitel.com.pe/bitel/latina/playlist.m3u8",
         id: "latina"
     },
     {
         name: "ATV (Canal 9) HD",
-        url: "https://live.saohgdasregions.fun:9092/MjAwLjIxNS4yNDguMTc1/23_.m3u8?token=Pl8jRWv69x4reB-vFba4_A&expires=1766956208",
+        url: "https://live-evg4.tv360.bitel.com.pe/bitel/atv/playlist.m3u8",
         id: "atv"
     },
     {
@@ -110,11 +110,15 @@ function init() {
         channelList.appendChild(item);
     });
 
-    // Toggle logic
-    btnToggleChannels.addEventListener('click', () => {
-        const isOpen = channelListContainer.classList.toggle('show');
-        btnToggleChannels.classList.toggle('open', isOpen);
-    });
+    // Toggle logic with defensive check
+    if (btnToggleChannels && channelListContainer) {
+        btnToggleChannels.addEventListener('click', () => {
+            const isOpen = channelListContainer.classList.toggle('show');
+            btnToggleChannels.classList.toggle('open', isOpen);
+        });
+    } else {
+        console.warn("Toggle elements not found in DOM");
+    }
 
     // Load first channel
     if (channels.length > 0) {
