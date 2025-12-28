@@ -23,6 +23,11 @@ const channels = [
         name: "Exitosa TV",
         url: "https://luna-1-video.mediaserver.digital/exitosatv_233b-4b49-a726-5a3cb0e3243c/index.fmp4.m3u8",
         id: "exitosa"
+    },
+    {
+        name: "TLNovelas HD",
+        url: "https://televisa-televisa-1-it.samsung.wurl.tv/playlist.m3u8",
+        id: "tlnovelas"
     }
 ];
 
