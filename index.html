@@ -12,23 +12,30 @@
 </head>
 
 <body>
-    <button class="channels-toggle-btn open" id="btnToggleChannels">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
-            <path
-                d="M4,11h5V5H4V11z M4,19h5v-6H4V19z M10,19h5v-6h-5V19z M16,19h5v-6h-5V19z M10,11h5V5h-5V11z M16,5v6h5V5H16z" />
-        </svg>
-        CANALES
-        <svg class="chevron" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-            <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
-        </svg>
-    </button>
-
-    <div class="channel-list-container show" id="channelListContainer">
-        <div class="channel-list" id="channelList">
-            <!-- Channels will be injected by JavaScript -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h1>SION TV</h1>
+            <p style="font-size: 0.8rem; opacity: 0.6;">Canales en Vivo</p>
         </div>
-    </div>
-    </div>
+
+        <div class="sidebar-content">
+            <button class="channels-toggle-btn open" id="btnToggleChannels">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                    <path
+                        d="M4,11h5V5H4V11z M4,19h5v-6H4V19z M10,19h5v-6h-5V19z M16,19h5v-6h-5V19z M10,11h5V5h-5V11z M16,5v6h5V5H16z" />
+                </svg>
+                CANALES
+                <svg class="chevron" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
+                </svg>
+            </button>
+
+            <div class="channel-list-container show" id="channelListContainer">
+                <div class="channel-list" id="channelList">
+                    <!-- Channels will be injected by JavaScript -->
+                </div>
+            </div>
+        </div>
     </aside>
 
     <main class="main-content" id="playerWrapper">
