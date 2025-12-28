@@ -193,4 +193,6 @@ fullscreenBtn.onclick = () => {
     }
 };
 
+console.info("Player Version: 3.1.0 - Canal 4 Fixed");
+console.info("Current Canal 4 URL:", channels[0].url);
 init();
