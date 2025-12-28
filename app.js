@@ -6,7 +6,7 @@ const channels = [
     },
     {
         name: "Latina (Canal 2) HD",
-        url: "https://jireh-1-hls-video-pe-isp.dps.live/hls-video/567ffde3fa319fadf3419efda25619456231dfea/latina/latina.smil/latina/livestream0/chunks.m3u8?dpssid=b27270653236951c11964054&sid=ba5t1l1xb220680227436951c1263e7d6&ndvc=0",
+        url: "https://live-evg1.tv360.bitel.com.pe/bitel/latina/playlist.m3u8",
         id: "latina"
     },
     {
