@@ -10,11 +10,6 @@ const channels = [
         id: "latina"
     },
     {
-        name: "Disney Channel",
-        url: "http://201.230.121.186:8000/play/a0fb/index.m3u8",
-        id: "disney"
-    },
-    {
         name: "ATV (Canal 9) HD",
         url: "https://live.saohgdasregions.fun:9092/MjAwLjIxNS4yNDguMTc1/23_.m3u8?token=Pl8jRWv69x4reB-vFba4_A&expires=1766956208",
         id: "atv"
