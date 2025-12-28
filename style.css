@@ -23,13 +23,14 @@ body {
 
 .sidebar {
     width: var(--sidebar-width);
+    min-width: var(--sidebar-width);
     background: var(--glass-bg);
-    backdrop-filter: blur(15px);
+    backdrop-filter: blur(20px);
     border-right: 1px solid var(--glass-border);
     display: flex;
     flex-direction: column;
-    z-index: 10;
-    transition: transform 0.3s ease;
+    z-index: 100;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .sidebar-header {
@@ -58,27 +59,28 @@ body {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--glass-border);
     color: var(--text-color);
-    padding: 1rem;
+    padding: 0.8rem 1.2rem;
     border-radius: 12px;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 1rem;
-    font-size: 1.1rem;
-    font-weight: 700;
-    transition: all 0.3s ease;
+    gap: 0.8rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
     text-align: left;
     justify-content: space-between;
+    margin-bottom: 0.5rem;
 }
 
 .channels-toggle-btn:hover {
     background: rgba(255, 255, 255, 0.1);
     border-color: var(--accent-color);
-    box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
 }
 
 .channels-toggle-btn .chevron {
     transition: transform 0.3s ease;
+    opacity: 0.7;
 }
 
 .channels-toggle-btn.open .chevron {
@@ -88,9 +90,10 @@ body {
 .channels-toggle-btn.open {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    background: var(--accent-color);
-    color: #000;
+    background: rgba(0, 210, 255, 0.15);
+    color: var(--accent-color);
     border-color: var(--accent-color);
+    margin-bottom: 0;
 }
 
 .channel-list-container {
