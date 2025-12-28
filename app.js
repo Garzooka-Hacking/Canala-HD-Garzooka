@@ -50,11 +50,23 @@ function loadChannel(channel) {
     });
 
     if (Hls.isSupported()) {
-        hls = new Hls();
+        console.log("Hls is supported, loading source:", channel.url);
+        hls = new Hls({
+            debug: false,
+            enableWorker: true,
+            lowLatencyMode: true,
+            backBufferLength: 60
+        });
         hls.loadSource(channel.url);
         hls.attachMedia(video);
         hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
-            video.play();
+            console.log("Manifest parsed, playing...");
+            video.play().catch(e => {
+                console.warn("Autoplay blocked or play failed:", e);
+                // Try to play muted if blocked
+                video.muted = true;
+                video.play();
+            });
             updateQualityMenu(hls);
         });
 
@@ -64,6 +76,7 @@ function loadChannel(channel) {
         });
 
         hls.on(Hls.Events.ERROR, function (event, data) {
+            console.error("HLS Error:", data);
             if (data.fatal) {
                 switch (data.type) {
                     case Hls.ErrorTypes.NETWORK_ERROR:
@@ -75,17 +88,20 @@ function loadChannel(channel) {
                         hls.recoverMediaError();
                         break;
                     default:
-                        console.error("Unrecoverable error");
+                        console.error("Unrecoverable error Type:", data.type);
                         hls.destroy();
                         break;
                 }
             }
         });
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        console.log("Native HLS support detected");
         video.src = channel.url;
         video.addEventListener('loadedmetadata', function () {
-            video.play();
+            video.play().catch(e => console.warn("Native play failed:", e));
         });
+    } else {
+        alert("Tu navegador no soporta la reproducción de este contenido.");
     }
 }
 
