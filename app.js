@@ -31,6 +31,11 @@ const channelList = document.getElementById('channelList');
 const channelTitle = document.getElementById('channelTitle');
 const fullscreenBtn = document.getElementById('fullscreenBtn');
 const playerWrapper = document.getElementById('playerWrapper');
+const playerContainer = document.getElementById('playerContainer');
+const channelsGridView = document.getElementById('channelsGridView');
+const gridContainer = document.getElementById('gridContainer');
+const btnPlayer = document.getElementById('btnPlayer');
+const btnShowChannels = document.getElementById('btnShowChannels');
 
 let hls = null;
 
@@ -42,12 +47,14 @@ function loadChannel(channel) {
     channelTitle.textContent = channel.name;
 
     // Update active state in sidebar
-    document.querySelectorAll('.channel-item').forEach(item => {
+    document.querySelectorAll('.channel-item, .nav-btn').forEach(item => {
         item.classList.remove('active');
-        if (item.dataset.id === channel.id) {
+        if (item.dataset.id === channel.id || item.id === 'btnPlayer') {
             item.classList.add('active');
         }
     });
+
+    hideChannelsGrid();
 
     if (Hls.isSupported()) {
         console.log("Hls is supported, loading source:", channel.url);
@@ -127,6 +134,52 @@ function init() {
     if (channels.length > 0) {
         loadChannel(channels[0]);
     }
+
+    // Setup Grid
+    setupChannelsGrid();
+
+    // Nav Listeners
+    btnPlayer.addEventListener('click', () => {
+        hideChannelsGrid();
+        btnPlayer.classList.add('active');
+        btnShowChannels.classList.remove('active');
+    });
+
+    btnShowChannels.addEventListener('click', () => {
+        showChannelsGrid();
+        btnShowChannels.classList.add('active');
+        btnPlayer.classList.remove('active');
+    });
+}
+
+function setupChannelsGrid() {
+    gridContainer.innerHTML = '';
+    channels.forEach(channel => {
+        const item = document.createElement('div');
+        item.className = 'grid-channel-item';
+
+        const channelNum = channel.name.match(/\d+/);
+        const iconLabel = channelNum ? channelNum[0] : channel.name.charAt(0);
+
+        item.innerHTML = `
+            <div class="grid-icon">${iconLabel}</div>
+            <div class="grid-name">${channel.name}</div>
+        `;
+
+        item.onclick = () => {
+            loadChannel(channel);
+            btnPlayer.click();
+        };
+        gridContainer.appendChild(item);
+    });
+}
+
+function showChannelsGrid() {
+    channelsGridView.classList.add('show');
+}
+
+function hideChannelsGrid() {
+    channelsGridView.classList.remove('show');
 }
 
 // Quality Selector Logic
