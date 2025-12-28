@@ -1,7 +1,7 @@
 const channels = [
     {
         name: "América TV (Canal 4) HD",
-        url: "https://mdstrm.com/live-stream-playlist/6099b04d9418ac082441dd74.m3u8?uid=ijJvEyekdqgE1cTxuZtbyiKFcqdCP8fv&sid=8uIZstISGVkxQfgnsf6y8eo7g1pzZjrp&pid=vEUzxX9pXr6UG5P3v8GhDquzwUWydJO7&pid_dvr=niC8VbidpMcw3iCclV8p2ZMOfEx9Zfl9&an=tvGO-live&at=web-app&av=v6.0.240&ref=&res=991x747&without_cookies=false&listenerid=&dnt=true&access_token=eVEFtolfEVpRvXSfwDG1eJizrUspX7qrFWwA45IXtyUjkZR6ujSv7NLsysbwl3ZEdXPdZRoCpmG",
+        url: "https://pe-p1-p-e-xm2.cdn.mdstrm.com/live-stream-secure/6099b04d9418ac082441dd74/publish/media_5000.m3u8?aid=5b8ea6f89ff52d0770a144c4&uid=VTUTEBFhR0QSNONlZ5OCuO6vepeN3W54&sid=I4qJ7OU6PHIECO2UXDTx39NO9OK3gp7O&pid=EvQbmxucfUZY14HHLWs7Vith2MvLdtMY&pid_dvr=N0PhSuc6Wrz0OEn4XpcnG3BPFdvgMWNt&ref=https%3A%2F%2Ftvgo.americatv.com.pe%2F&without_cookies=false&listenerid=&dnt=true&access_token=hAc92Ye4xRhoRjaLM0Sy8NWQ7Vou1eDWFDt5j43B92nx8ZIKbNQ9MmTqf34sPloyItMn7WPoXHk&es=pe-p1-p-e-xm2.cdn.mdstrm.com&ote=1767035287873&ot=1-fMe47Kl_DJVPinPt90JA&proto=https&pz=us",
         id: "america-tv"
     },
     {
