@@ -1,7 +1,7 @@
 const channels = [
     {
         name: "América TV (Canal 4) HD",
-        url: "https://live-evg1.tv360.bitel.com.pe/bitel/americatv/playlist.m3u8",
+        url: "https://live.saohgdasregions.fun:9092/MjAwLjIxNS4yNDguMTc1/20_.m3u8?token=KFaX5okSwxKyBLjHXjrVcQ&expires=1766984007",
         id: "america-tv"
     },
     {
@@ -11,7 +11,7 @@ const channels = [
     },
     {
         name: "ATV (Canal 9) HD",
-        url: "https://d3krdjs7is1y42.cloudfront.net/ATVpe/5b41984f34e1/medialist_15609871089997455276_hls.m3u8",
+        url: "https://d2qsan2ut81n2k.cloudfront.net/live/25046411-8673-4dec-8ae8-5b41984f34e1/medialist_15609871089997455276_hls.m3u8",
         id: "atv"
     },
     {
