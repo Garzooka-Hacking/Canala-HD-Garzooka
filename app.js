@@ -23,6 +23,11 @@ const channels = [
         name: "TLNovelas HD",
         url: "https://televisa-televisa-1-it.samsung.wurl.tv/playlist.m3u8",
         id: "tlnovelas"
+    },
+    {
+        name: "Discovery Channel HD",
+        url: "https://live.saohgdasregions.fun:9092/MjAwLjIxNS4yNDguMTc1/37_.m3u8?token=IJihHp4W2oL3itw4i_LQTQ&expires=1766983439",
+        id: "discovery"
     }
 ];
 
