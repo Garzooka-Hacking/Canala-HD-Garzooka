@@ -31,7 +31,7 @@ const channels = [
     },
     {
         name: "Telemundo Internacional",
-        url: "https://live.saohgdasregions.fun:9092/MjAwLjIxNS4yNDguMTc1/8_.m3u8?token=2eaHdg60GerjWUyj0Nex6A&expires=1766988744",
+        url: "https://srdiegoiptvfast.alwaysdata.net/pagtv/telelatino/345.m3u8",
         id: "telemundo"
     }
 ];
