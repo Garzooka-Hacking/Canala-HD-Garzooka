@@ -6,12 +6,12 @@ const channels = [
     },
     {
         name: "Latina (Canal 2) HD",
-        url: "https://live-evg1.tv360.bitel.com.pe/bitel/latina/playlist.m3u8",
+        url: "https://jireh-1-hls-video-pe-isp.dps.live/hls-video/567ffde3fa319fadf3419efda25619456231dfea/latina/latina.smil/latina/livestream0/chunks.m3u8?dpssid=b27270653236951c11964054&sid=ba5t1l1xb220680227436951c1263e7d6&ndvc=0",
         id: "latina"
     },
     {
         name: "ATV (Canal 9) HD",
-        url: "https://d2qsan2ut81n2k.cloudfront.net/live/25046411-8673-4dec-8ae8-5b41984f34e1/medialist_15609871089997455276_hls.m3u8",
+        url: "https://live.saohgdasregions.fun:9092/MjAwLjIxNS4yNDguMTc1/23_.m3u8?token=Knpfk4C3nyaAPxGc4U1iQA&expires=1766984620",
         id: "atv"
     },
     {
