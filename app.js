@@ -31,7 +31,7 @@ const channels = [
     },
     {
         name: "Telemundo Internacional",
-        url: "https://srdiegoiptvfast.alwaysdata.net/pagtv/telelatino/345.m3u8",
+        url: "https://nbculocallive.akamaized.net/hls/live/2037499/puertorico/stream1/master.m3u8",
         id: "telemundo"
     }
 ];
