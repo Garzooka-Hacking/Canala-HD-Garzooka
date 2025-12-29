@@ -28,6 +28,11 @@ const channels = [
         name: "Discovery Channel HD",
         url: "https://live.saohgdasregions.fun:9092/MjAwLjIxNS4yNDguMTc1/37_.m3u8?token=IJihHp4W2oL3itw4i_LQTQ&expires=1766983439",
         id: "discovery"
+    },
+    {
+        name: "Telemundo Internacional",
+        url: "https://live.saohgdasregions.fun:9092/MjAwLjIxNS4yNDguMTc1/8_.m3u8?token=2eaHdg60GerjWUyj0Nex6A&expires=1766988744",
+        id: "telemundo"
     }
 ];
 
