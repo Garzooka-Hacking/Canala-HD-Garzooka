@@ -1,6 +1,7 @@
 :root {
-    --glass-bg: rgba(255, 255, 255, 0.1);
-    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-bg: #0f0f1a;
+    /* Solid color for TV performance */
+    --glass-border: #333;
     --accent-color: #00d2ff;
     --text-color: #ffffff;
     --sidebar-width: 300px;
@@ -25,7 +26,8 @@ body {
     width: var(--sidebar-width);
     min-width: var(--sidebar-width);
     background: var(--glass-bg);
-    backdrop-filter: blur(20px);
+    background: var(--glass-bg);
+    /* backdrop-filter removed for TV performance */
     border-right: 1px solid var(--glass-border);
     display: flex;
     flex-direction: column;
@@ -235,9 +237,9 @@ video {
     bottom: 50px;
     right: 0;
     min-width: 150px;
-    background: rgba(0, 0, 0, 0.9);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--glass-border);
+    background: #000;
+    /* backdrop-filter removed for TV performance */
+    border: 1px solid #333;
     border-radius: 12px;
     padding: 8px 0;
     display: none;
@@ -289,13 +291,8 @@ video {
 }
 
 .btn-fullscreen {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    color: white;
-    padding: 0.8rem 1.5rem;
-    border-radius: 8px;
-    cursor: pointer;
-    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.8);
+    /* backdrop-filter removed for TV performance */
     font-weight: 600;
     transition: all 0.2s;
 }
